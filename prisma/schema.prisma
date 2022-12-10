@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum PostProvider {
+  REDDIT
+  ORIGIN
+}
+
+model Post {
+  id             Int          @id @unique @default(autoincrement())
+  foreignId      String?
+  title          String       @db.VarChar(500)
+  link           String       @unique @db.VarChar(255)
+  pubDate        DateTime     @default(now())
+  author         String       @db.VarChar(50)
+  content        String       @db.LongText
+  contentSnippet String       @db.LongText
+  provider       PostProvider
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @default(now()) @updatedAt
+
+  @@fulltext([content, title])
+}
+
+model User {
+  id           Int       @id @unique @default(autoincrement())
+  email        String    @unique
+  passwordHash String
+  salt         String
+  Session      Session[]
+}
+
+model Session {
+  id        String   @id @unique @default(uuid())
+  userId    Int
+  lastLogIn DateTime @default(now())
+
+  User User @relation(references: [id], fields: [userId])
+}

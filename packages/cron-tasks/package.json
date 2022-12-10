@@ -1,0 +1,14 @@
+{
+  "name": "cron-tasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "docker:start": "node dist/index.js",
+    "build": "tsc --skipLibCheck"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.11"
+  }
+}

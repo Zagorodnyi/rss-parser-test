@@ -1,0 +1,50 @@
+{
+  "name": "rss-parser",
+  "version": "1.0.0",
+  "description": "",
+  "prisma": {
+    "seed": "ts-node prisma/seed/index.ts"
+  },
+  "scripts": {
+    "bootstrap:project": "npm ci && npm run setup-env && npm run bootstrap:db",
+    "bootstrap:db": "docker compose up -d mysql && npx prisma migrate dev && npx prisma db seed",
+    "migrate:db": "docker compose -f docker-compose.migrate.yml up --force-recreate",
+    "-": "",
+    "start:api": "npm run start -w api",
+    "start:cron": "npm run start -w cron-tasks",
+    "start:admin": "npm run start -w admin",
+    "start:backend": "npm run start:cron & npm run start:api",
+    "--": "",
+    "build:project": "turbo run build",
+    "---": "",
+    "docker:up": "chmod +x ./scripts/start.sh && ./scripts/start.sh",
+    "docker:down": "docker compose down",
+    "----": "",
+    "setup-env": "node scripts/setupEnv.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.11.11",
+    "prisma": "^4.7.1",
+    "ts-node": "^10.9.1",
+    "turbo": "^1.6.3",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.7.1",
+    "fastify": "^4.10.2",
+    "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.7.1",
+    "react-hook-form": "^7.40.0",
+    "rss-parser": "^3.12.0",
+    "zod": "^3.19.1"
+  },
+  "workspaces": [
+    "packages/admin",
+    "packages/api",
+    "packages/cron-tasks"
+  ]
+}

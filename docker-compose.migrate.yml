@@ -1,0 +1,16 @@
+version: '3'
+services:
+  prisma-migrate:
+    container_name: prisma-migrate
+    build:
+      dockerfile: Dockerfile.Prisma
+      context: '.'
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: 'mysql://root:${MYSQL_ROOT_PASSWORD}@mysql:3306/${MYSQL_DATABASE}'
+    networks:
+      - rss-parser_common-network
+networks:
+  rss-parser_common-network:
+    external: true
