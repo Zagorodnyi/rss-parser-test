@@ -13,4 +13,5 @@ services:
       - rss-parser_common-network
 networks:
   rss-parser_common-network:
-    external: true
+    external:
+      name: 'rss-parser-network'

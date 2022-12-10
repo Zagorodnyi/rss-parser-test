@@ -60,6 +60,7 @@ services:
       - common-network
 networks:
   common-network:
+    name: 'rss-parser-network'
     driver: bridge
 
 volumes:
