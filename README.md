@@ -13,8 +13,8 @@
 
 
 Go to localhost:3000 and log in with default credentials:
-  email: user@mail.com
-  password: user
+  - email: user@mail.com
+  - password: user
 
 REST API will be available on localhost:5000;
 Cron task runs every 30sec.
